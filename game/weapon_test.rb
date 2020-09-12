@@ -1,8 +1,9 @@
 require_relative 'weapon'
 require 'test/unit'
 
+# Weapon test class
 class WeaponTest < Test::Unit::TestCase
-
+  # Weapon class used for the test
   class WeaponTest < Weapon
     # @return [Array<String>]
     def valid_weapon_list
@@ -12,6 +13,7 @@ class WeaponTest < Test::Unit::TestCase
 
   # @return [Nil]
   def test_invalid_weapon_init
+    # noinspection RubyYardParamTypeMatch
     assert_raise(Weapon::InvalidWeaponError) { Weapon.new(123) }
   end
 
@@ -30,5 +32,4 @@ class WeaponTest < Test::Unit::TestCase
   def test_weapon_not_in_valid_list
     assert_raise(Weapon::WeaponNotFoundError) { WeaponTest.new('invalid_weapon') }
   end
-
 end

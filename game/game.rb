@@ -7,7 +7,6 @@ require 'set'
 
 # Class to represent a Game
 class Game
-
   class GameError < StandardError; end
 
   # Error received when trying to add a player to a Game with an invalid player (should be a Player)
@@ -34,13 +33,12 @@ class Game
     end
   end
 
-
   attr_reader :players, :kills
 
   # @return [Game]
   def initialize
     @players = Set.new
-    @kills = Array.new
+    @kills = []
   end
 
   # @param player [Player]
@@ -59,5 +57,4 @@ class Game
 
     @kills.append(kill)
   end
-
 end

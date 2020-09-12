@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'player'
 require_relative 'weapon'
 require_relative 'kill'
@@ -6,8 +8,9 @@ require 'test/unit'
 
 require 'set'
 
+# Game test class
 class GameTest < Test::Unit::TestCase
-
+  # Weapon class used for the test
   class WeaponTest < Weapon
     # @return [Array<String>]
     def valid_weapon_list
@@ -39,6 +42,7 @@ class GameTest < Test::Unit::TestCase
   # @return [Nil]
   def test_add_invalid_players
     player = 'not a player'
+    # noinspection RubyYardParamTypeMatch
     assert_raise(Game::GameInvalidPlayerError) { @game.add_player(player) }
   end
 
@@ -74,6 +78,7 @@ class GameTest < Test::Unit::TestCase
 
   # @return [Nil]
   def test_add_invalid_kill
+    # noinspection RubyYardParamTypeMatch
     assert_raise(Game::GameInvalidKillError) { @game.add_kill('Not a kill') }
   end
 
@@ -84,5 +89,4 @@ class GameTest < Test::Unit::TestCase
     kill = new_valid_kill(killer, killed)
     assert_raise(Game::GameKillPlayerNotInGame) { @game.add_kill(kill) }
   end
-
 end

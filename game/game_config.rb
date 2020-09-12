@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
 require_relative 'player'
 require_relative 'weapon'
 require_relative 'kill'
 require_relative 'game'
 
+# Class that bundles all game entities
 class GameConfig
-
   class GameConfigError < StandardError; end
 
+  # Error received when trying to use a invalid Player in the GameConfig
   class GameConfigInvalidPlayerClass < GameConfigError
     # @return [String]
     def message
@@ -14,6 +17,7 @@ class GameConfig
     end
   end
 
+  # Error received when trying to use a invalid Weapon in the GameConfig
   class GameConfigInvalidWeaponClass < GameConfigError
     # @return [String]
     def message
@@ -21,6 +25,7 @@ class GameConfig
     end
   end
 
+  # Error received when trying to use a invalid Kill in the GameConfig
   class GameConfigInvalidKillClass < GameConfigError
     # @return [String]
     def message
@@ -28,6 +33,7 @@ class GameConfig
     end
   end
 
+  # Error received when trying to use a invalid Game in the GameConfig
   class GameConfigInvalidGameClass < GameConfigError
     # @return [String]
     def message
