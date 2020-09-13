@@ -28,6 +28,14 @@ class GameTest < Test::Unit::TestCase
     Kill.new(killer, killed, weapon)
   end
 
+  # @param player_name [String]
+  # @return [Suicide]
+  def new_valid_suicide(player_name)
+    player = Player.new(player_name)
+    weapon = WeaponTest.new('test_weapon')
+    Suicide.new(player, weapon)
+  end
+
   # @return [Nil]
   def setup
     @game = Game.new
@@ -73,7 +81,7 @@ class GameTest < Test::Unit::TestCase
     kill = new_valid_kill(killer, killed)
     @game.add_kill(kill)
     assert_equal(1, @game.kills.length, 'Expected only one kill')
-    assert_equal(kill, @game.kills[0], 'Unexpeted kill')
+    assert_equal(kill, @game.kills[0], 'Unexpected kill')
   end
 
   # @return [Nil]
@@ -87,6 +95,29 @@ class GameTest < Test::Unit::TestCase
     killer = 'killer'
     killed = 'killed'
     kill = new_valid_kill(killer, killed)
-    assert_raise(Game::GameKillPlayerNotInGame) { @game.add_kill(kill) }
+    assert_raise(Game::GamePlayerNotInGame) { @game.add_kill(kill) }
+  end
+
+  # @return [Nil]
+  def test_add_valid_suicide
+    player_name = 'player'
+    @game.add_player(Player.new(player_name))
+    suicide = new_valid_suicide(player_name)
+    @game.add_suicide(suicide)
+    assert_equal(1, @game.suicides.length, 'Expected only one suicide')
+    assert_equal(suicide, @game.suicides[0], 'Unexpected suicide')
+  end
+
+  # @return [Nil]
+  def test_add_invalid_suicide
+    # noinspection RubyYardParamTypeMatch
+    assert_raise(Game::GameInvalidSuicideError) { @game.add_suicide('Not a suicide') }
+  end
+
+  # @return [Nil]
+  def test_add_valid_suicide_with_player_not_in_game
+    player_name = 'player'
+    suicide = new_valid_suicide(player_name)
+    assert_raise(Game::GamePlayerNotInGame) { @game.add_suicide(suicide) }
   end
 end

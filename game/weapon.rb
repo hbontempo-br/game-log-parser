@@ -25,7 +25,6 @@ class Weapon < String
   def initialize(name)
     raise InvalidWeaponError unless name.is_a? String
 
-    puts valid_weapon_list
     raise WeaponNotFoundError unless valid_weapon_list.include? name
 
     super(name)

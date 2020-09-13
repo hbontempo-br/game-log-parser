@@ -3,6 +3,7 @@
 require_relative 'player'
 require_relative 'weapon'
 require_relative 'kill'
+require_relative 'suicide'
 require 'set'
 
 # Class to represent a Game
@@ -25,20 +26,29 @@ class Game
     end
   end
 
+  # Error received when trying to add a suicide to a Game with an invalid suicide (should be a Suicide)
+  class GameInvalidSuicideError < GameError
+    # @return [String]
+    def message
+      'Invalid Suicide'
+    end
+  end
+
   # Error received when trying to add a kill to a Game with an a player not previously added
-  class GameKillPlayerNotInGame < GameError
+  class GamePlayerNotInGame < GameError
     # @return [String]
     def message
       'Player involved in kill not in the game'
     end
   end
 
-  attr_reader :players, :kills
+  attr_reader :players, :kills, :suicides
 
   # @return [Game]
   def initialize
     @players = Set.new
     @kills = []
+    @suicides = []
   end
 
   # @param player [Player]
@@ -53,8 +63,17 @@ class Game
   # @return [Array<Kill>]
   def add_kill(kill)
     raise GameInvalidKillError unless kill.is_a? Kill
-    raise GameKillPlayerNotInGame unless @players.include?(kill.killer) && @players.include?(kill.killed)
+    raise GamePlayerNotInGame unless @players.include?(kill.killer) && @players.include?(kill.killed)
 
     @kills.append(kill)
+  end
+
+  # @param suicide [Suicide]
+  # @return [Array<Suicide>]
+  def add_suicide(suicide)
+    raise GameInvalidSuicideError unless suicide.is_a? Suicide
+    raise GamePlayerNotInGame unless @players.include?(suicide.player)
+
+    @suicides.append(suicide)
   end
 end
