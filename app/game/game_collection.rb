@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'game'
+require_relative 'base_game/game'
 
 # Class to represent a collection of Games
 class GameCollection
