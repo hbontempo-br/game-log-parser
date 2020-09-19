@@ -5,12 +5,13 @@ require './app/game/base_game/weapon'
 require './app/game/base_game/kill'
 require './app/game/base_game/suicide'
 require './app/game/base_game/game'
-require './app/dtos/game_dto'
+require './app/game/game_collection'
+require './app/dtos/game_collection_dto'
 
 require 'test/unit'
 
-# GameDTO test class
-class GameDTOTest < Test::Unit::TestCase
+# GameCollectionDTO test class
+class GameCollectionDTOTest < Test::Unit::TestCase
   # Weapon class used for the test
   class WeaponTest < Weapon
     # @return [Array<String>]
@@ -47,24 +48,27 @@ class GameDTOTest < Test::Unit::TestCase
     suicide_player = Player.new('player')
     @game.add_player(suicide_player)
     @game.add_suicide(new_valid_suicide(player_name))
+    @game_collection = GameCollection.new
+    @game_collection.add_game(@game)
+    @game_collection.add_game(@game)
   end
 
   # @return [Nil]
   def test_valid_dto_init
-    game_dto = GameDTO.new(@game)
-    assert_equal(@game, game_dto.game, 'Unexpected game in DTO')
+    game_collection_dto = GameCollectionDTO.new(@game_collection)
+    assert_equal(@game_collection, game_collection_dto.game_collection, 'Unexpected game_collection in DTO')
   end
 
   # @return [Nil]
   def test_invalid_dto_init
-    assert_raise(GameDTO::InvalidGameGameDTOError) { GameDTO.new('Not a Game') }
+    assert_raise(GameCollectionDTO::InvalidGameCollectionDTOError) { GameCollectionDTO.new('Not a Game') }
   end
 
   # @return [Nil]
   def test_hash
-    game_dto = GameDTO.new(@game)
-    game_dto_hash = game_dto.to_hash
-    expected_hash = {
+    game_collection_dto = GameCollectionDTO.new(@game_collection)
+    game_collection_dto_hash = game_collection_dto.to_hash
+    expected_game_hash = {
       'total_kills' => 2,
       'players' => %w[killer killed player],
       'kills' => {
@@ -73,7 +77,11 @@ class GameDTOTest < Test::Unit::TestCase
         'player' => -1
       }
     }
-    assert_equal(expected_hash, game_dto_hash, 'Invalid hash generated')
+    expected_hash = {
+      'game_1' => expected_game_hash,
+      'game_2' => expected_game_hash
+    }
+    assert_equal(expected_hash, game_collection_dto_hash, 'Invalid hash generated')
   end
 end
 
