@@ -55,6 +55,7 @@ class GameConfig
   # @param player_class [Class<Player>]
   # @param weapon_class [Class<Weapon>]
   # @param kill_class [Class<Kill>]
+  # @param suicide_class [Class<Suicide>]
   # @param game_class [Class<Game>]
   # @return [GameConfig]
   def initialize(player_class, weapon_class, kill_class, suicide_class, game_class)
