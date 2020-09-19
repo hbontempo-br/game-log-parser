@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'base_game/game'
-require_relative 'game_collection'
+require './app/game/base_game/game'
+require './app/game/game_collection'
 require 'test/unit'
 
 # GameConfig test class

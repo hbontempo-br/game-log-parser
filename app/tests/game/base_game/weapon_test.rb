@@ -1,4 +1,4 @@
-require_relative 'weapon'
+require './app/game/base_game/weapon'
 require 'test/unit'
 
 # Weapon test class

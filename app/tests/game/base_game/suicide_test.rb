@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'player'
-require_relative 'weapon'
-require_relative 'suicide'
+require './app/game/base_game/player'
+require './app/game/base_game/weapon'
+require './app/game/base_game/suicide'
 
 require 'test/unit'
 

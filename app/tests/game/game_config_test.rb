@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'base_game/player'
-require_relative 'base_game/weapon'
-require_relative 'base_game/kill'
-require_relative 'base_game/suicide'
-require_relative 'base_game/game'
-require_relative 'game_config'
+require './app/game/base_game/player'
+require './app/game/base_game/weapon'
+require './app/game/base_game/kill'
+require './app/game/base_game/suicide'
+require './app/game/base_game/game'
+require './app/game/game_config'
 require 'test/unit'
 
 # GameConfig test class

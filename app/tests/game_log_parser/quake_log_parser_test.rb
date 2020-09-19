@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'quake_log_parser'
+require './app/game_log_parser/quake_log_parser'
 
 require 'test/unit'
 

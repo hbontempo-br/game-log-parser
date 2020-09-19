@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../../game/game_config'
-require_relative '../../game/game_collection'
+require_relative '../game/game_config'
+require_relative '../game/game_collection'
 
 # Class to represent a game log parser
 class BaseLogParser

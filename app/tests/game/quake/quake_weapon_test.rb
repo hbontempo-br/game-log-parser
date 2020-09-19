@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'quake_weapon'
+require './app/game/quake/quake_weapon'
 require 'test/unit'
 
 # QuakeWeapon test class

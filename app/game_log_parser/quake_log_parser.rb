@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../base_log_parser/base_log_parser'
-require_relative '../../game/quake/quake_player'
-require_relative '../../game/quake/quake_weapon'
-require_relative '../../game/quake/quake_kill'
-require_relative '../../game/quake/quake_suicide'
-require_relative '../../game/quake/quake_game'
+require_relative 'base_log_parser'
+require_relative '../game/quake/quake_player'
+require_relative '../game/quake/quake_weapon'
+require_relative '../game/quake/quake_kill'
+require_relative '../game/quake/quake_suicide'
+require_relative '../game/quake/quake_game'
 
 # Class to represent a Quake log parser
 class QuakeLogParser < BaseLogParser

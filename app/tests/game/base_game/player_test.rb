@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'player'
+require './app/game/base_game/player'
 require 'test/unit'
 
 # Player test class

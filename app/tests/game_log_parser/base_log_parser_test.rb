@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative '../../game/base_game/player'
-require_relative '../../game/base_game/weapon'
-require_relative '../../game/base_game/kill'
-require_relative '../../game/base_game/suicide'
-require_relative '../../game/base_game/game'
-require_relative '../../game/game_config'
+require './app/game/base_game/player'
+require './app/game/base_game/weapon'
+require './app/game/base_game/kill'
+require './app/game/base_game/suicide'
+require './app/game/base_game/game'
+require './app/game/game_config'
 
-require_relative 'base_log_parser'
+require './app/game_log_parser/base_log_parser'
 
 require 'test/unit'
 
@@ -17,10 +17,12 @@ class BaseLogParserTest < Test::Unit::TestCase
   # Infinity enumerator just used for tests
   class EnumeratorTest < Enumerator
     attr_reader :response_list
+
     def initialize(response_list)
       @response_list = response_list
       super
     end
+
     def each
       @response_list.each do |i|
         yield i
@@ -32,57 +34,57 @@ class BaseLogParserTest < Test::Unit::TestCase
     game_config = GameConfig.new(Player, Weapon, Kill, Suicide, Game)
     BaseLogParser.new(game_config)
   end
-  
+
   # @return [Nil]
   def test_valid_initialize
     game_config = GameConfig.new(Player, Weapon, Kill, Suicide, Game)
     log_parser = BaseLogParser.new(game_config)
-    assert_equal(game_config, log_parser.game_config,'Unexpected game_config')
+    assert_equal(game_config, log_parser.game_config, 'Unexpected game_config')
   end
 
   # @return [Nil]
   def test_invalid_initialize
-    assert_raise(BaseLogParser::InvalidGameConfigGameLogParserError) {BaseLogParser.new('Not a GameConfig')}
+    assert_raise(BaseLogParser::InvalidGameConfigGameLogParserError) { BaseLogParser.new('Not a GameConfig') }
   end
 
   def test_new_game?
     log_parser = valid_log_parser
-    assert_raise(NotImplementedError) {log_parser.new_game?('whatever')}
+    assert_raise(NotImplementedError) { log_parser.new_game?('whatever') }
   end
 
   def test_game_end?
-  log_parser = valid_log_parser
-  assert_raise(NotImplementedError) {log_parser.game_end?('whatever')}
+    log_parser = valid_log_parser
+    assert_raise(NotImplementedError) { log_parser.game_end?('whatever') }
   end
 
   def test_kill?
     log_parser = valid_log_parser
-    assert_raise(NotImplementedError) {log_parser.kill?('whatever')}
+    assert_raise(NotImplementedError) { log_parser.kill?('whatever') }
   end
 
   def test_suicide?
     log_parser = valid_log_parser
-    assert_raise(NotImplementedError) {log_parser.suicide?('whatever')}
+    assert_raise(NotImplementedError) { log_parser.suicide?('whatever') }
   end
 
   def test_player?
     log_parser = valid_log_parser
-    assert_raise(NotImplementedError) {log_parser.player?('whatever')}
+    assert_raise(NotImplementedError) { log_parser.player?('whatever') }
   end
 
   def test_retrieve_player_name
     log_parser = valid_log_parser
-    assert_raise(NotImplementedError) {log_parser.retrieve_player_name('whatever')}
+    assert_raise(NotImplementedError) { log_parser.retrieve_player_name('whatever') }
   end
 
   def test_retrieve_kill_info
     log_parser = valid_log_parser
-    assert_raise(NotImplementedError) {log_parser.retrieve_kill_info('whatever')}
+    assert_raise(NotImplementedError) { log_parser.retrieve_kill_info('whatever') }
   end
 
   def test_retrieve_suicide_info
     log_parser = valid_log_parser
-    assert_raise(NotImplementedError) {log_parser.retrieve_suicide_info('whatever')}
+    assert_raise(NotImplementedError) { log_parser.retrieve_suicide_info('whatever') }
   end
 
   def test_invalid_process

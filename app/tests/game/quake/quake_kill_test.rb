@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'quake_kill'
+require './app/game/quake/quake_kill'
 require 'test/unit'
 
 # QuakeKill test class

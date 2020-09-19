@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'quake_game'
+require './app/game/quake/quake_game'
 require 'test/unit'
 
 # QuakeGame test class

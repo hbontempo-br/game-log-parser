@@ -1,11 +1,11 @@
 
-require_relative '../game_log_parser/quake_log_parser/quake_log_parser'
+require_relative '../game_log_parser/quake_log_parser'
 require_relative '../game/quake/quake_player'
 require_relative '../game/quake/quake_weapon'
-require_relative '..//game/quake/quake_kill'
-require_relative '..//game/quake/quake_suicide'
-require_relative '..//game/quake/quake_game'
-require_relative '..//game/game_config'
+require_relative '../game/quake/quake_kill'
+require_relative '../game/quake/quake_suicide'
+require_relative '../game/quake/quake_game'
+require_relative '../game/game_config'
 
 require 'sinatra'
 
