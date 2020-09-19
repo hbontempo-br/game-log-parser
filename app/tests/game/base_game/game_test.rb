@@ -121,4 +121,53 @@ class GameTest < Test::Unit::TestCase
     suicide = new_valid_suicide(player_name)
     assert_raise(Game::GamePlayerNotInGame) { @game.add_suicide(suicide) }
   end
+
+  # @return [Nil]
+  def test_valid_total_deaths
+    killer = 'killer'
+    killed = 'killed'
+    @game.add_player(Player.new(killer))
+    @game.add_player(Player.new(killed))
+    kill = new_valid_kill(killer, killed)
+    @game.add_kill(kill)
+    player_name = 'player'
+    @game.add_player(Player.new(player_name))
+    suicide = new_valid_suicide(player_name)
+    @game.add_suicide(suicide)
+
+    assert_equal(2, @game.total_deaths, 'Expected a total_deaths of 2 (1 kill + 1 suicide)')
+  end
+
+  # @return [Nil]
+  def test_valid_player_kill_score
+    killer_name = 'killer'
+    killer = Player.new(killer_name)
+    @game.add_player(killer)
+    killed_name= 'killed'
+    killed = Player.new(killed_name)
+    @game.add_player(killed)
+    kill = new_valid_kill(killer, killed)
+    @game.add_kill(kill)
+    player_name = 'player'
+    suicide_player = Player.new(player_name)
+    @game.add_player(suicide_player)
+    suicide = new_valid_suicide(player_name)
+    @game.add_suicide(suicide)
+
+    assert_equal(1, @game.player_kill_score(killer), 'killer should have a score = 1')
+    assert_equal(0, @game.player_kill_score(killed), 'killer should have a score = 0')
+    assert_equal(-1, @game.player_kill_score(suicide_player), 'killer should have a score = -1')
+  end
+
+  # @return [Nil]
+  def test_invalid_player_in_player_kill_score
+    assert_raise(Game::GameInvalidPlayerError) { @game.player_kill_score('Not a player') }
+  end
+
+  # @return [Nil]
+  def test_player_not_in_game_at_player_kill_score
+    assert_raise(Game::GamePlayerNotInGame) { @game.player_kill_score(Player.new('Player not in game')) }
+  end
+
+
 end

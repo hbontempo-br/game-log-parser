@@ -76,4 +76,25 @@ class Game
 
     @suicides.append(suicide)
   end
+
+  # @return [Integer]
+  def total_deaths
+    @suicides.length + @suicides.length
+  end
+
+  # @param player [Player]
+  # @return [Integer]
+  def player_kill_score(player)
+    raise GameInvalidPlayerError unless player.is_a? Player
+    raise GamePlayerNotInGame unless @players.include? player
+
+    kills = 0
+    @kills.each do |kill|
+      kills += 1 if kill.killer == player
+    end
+    @suicides.each do |suicide|
+      kills -= 1 if suicide.player == player
+    end
+    kills
+  end
 end
