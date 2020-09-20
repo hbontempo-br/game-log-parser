@@ -187,4 +187,18 @@ class GameTest < Test::Unit::TestCase
     assert_equal(expected_hash, @game.all_players_score, 'Score different than the expected')
 
   end
+
+  # @return [Nil]
+  def test_rank
+    @game.add_player(killer = Player.new('killer'))
+    @game.add_player(killed = Player.new('killed'))
+    @game.add_kill(kill = new_valid_kill(killer, killed))
+    player_name = 'player'
+    @game.add_player(Player.new('player'))
+    @game.add_suicide(new_valid_suicide(player_name))
+
+    expected_rank = %w[killer killed player]
+
+    assert_equal(expected_rank, @game.player_rank, 'Calculated rank differs from expected one')
+  end
 end

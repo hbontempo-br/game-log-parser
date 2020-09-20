@@ -69,13 +69,18 @@ class GameCollectionDTOTest < Test::Unit::TestCase
     game_collection_dto = GameCollectionDTO.new(@game_collection)
     game_collection_dto_hash = game_collection_dto.to_hash
     expected_game_hash = {
-        total_kills: 2,
-        players: %w[killer killed player],
-        kills: {
-            'killer' => 1,
-            'killed' => 0,
-            'player' => -1
-        }
+      total_kills: 2,
+      players: %w[killer killed player],
+      kills: {
+        'killer' => 1,
+        'killed' => 0,
+        'player' => -1
+      },
+      rank: {
+        '1' => 'killer',
+        '2' => 'killed',
+        '3' => 'player'
+      }
     }
     expected_hash = {
       'game_1' => expected_game_hash,

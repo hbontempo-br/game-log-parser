@@ -107,4 +107,9 @@ class Game
     kills_hash
   end
 
+  def player_rank
+    scores = all_players_score
+    rank = scores.sort_by { |player, score| score }
+    rank.reverse.map { |position| position[0] }
+  end
 end

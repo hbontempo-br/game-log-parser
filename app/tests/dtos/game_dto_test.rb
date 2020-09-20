@@ -70,6 +70,11 @@ class GameDTOTest < Test::Unit::TestCase
         'killer' => 1,
         'killed' => 0,
         'player' => -1
+      },
+      rank: {
+        '1' => 'killer',
+        '2' => 'killed',
+        '3' => 'player'
       }
     }
     assert_equal(expected_hash, game_dto_hash, 'Invalid hash generated')
