@@ -1,26 +1,38 @@
+# frozen_string_literal: true
 
 require_relative '../game_log_parser/quake_log_parser'
-require_relative '../game/quake/quake_player'
-require_relative '../game/quake/quake_weapon'
-require_relative '../game/quake/quake_kill'
-require_relative '../game/quake/quake_suicide'
-require_relative '../game/quake/quake_game'
-require_relative '../game/game_config'
+require_relative '../dtos/game_collection_dto'
+require_relative '../utils/http_error'
+
+require 'json'
 
 require 'sinatra'
 
+# QuakeLog resource class
 class QuakeLogController < Sinatra::Base
+  helpers Sinatra::ErrorHandling
 
-  # configure :production, :development do
-  #   enable :logging
-  # end
+  before do
+    content_type :json
+  end
 
   post '/quake/upload' do
-    # logger.info 'Initiated quake log parsing'
+    halt_bad_request('File is missing') unless params[:file] && params[:file][:tempfile]
+
     file = params[:file][:tempfile]
-    file_reader = file.open.each_line
-    quake_parser = QuakeLogParser.new
-    game_collection = quake_parser.process(file_reader)
-    file.close
+    begin
+      file_reader = file.open.each_line
+      quake_parser = QuakeLogParser.new
+      game_collection = quake_parser.process(file_reader)
+      game_collection_dto = GameCollectionDTO.new(game_collection)
+      response = game_collection_dto.to_hash
+
+      status 200
+      body response.to_json
+    rescue StandardError
+      halt_bad_request('Unable to process provided files')
+    ensure
+      file&.close
+    end
   end
 end

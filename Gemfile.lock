@@ -7,6 +7,8 @@ GEM
     rack (2.2.3)
     rack-protection (2.1.0)
       rack
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
     require_all (3.0.0)
     ruby2_keywords (0.0.2)
     sinatra (2.1.0)
@@ -23,9 +25,13 @@ PLATFORMS
 
 DEPENDENCIES
   rack (~> 2.2)
+  rack-test (~> 1.1)
   require_all
   sinatra (~> 2.1)
   test-unit
+
+RUBY VERSION
+   ruby 2.7.1p83
 
 BUNDLED WITH
    2.1.4

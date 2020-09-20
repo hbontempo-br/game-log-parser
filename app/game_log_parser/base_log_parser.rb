@@ -11,7 +11,7 @@ class BaseLogParser
   class InvalidFileReaderGameLogParserError < GameLogParserError
     # @return [String]
     def message
-      'Invalid file reader'
+      'Invalid files reader'
     end
   end
 
