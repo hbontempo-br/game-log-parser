@@ -83,6 +83,8 @@ class GameTest < Test::Unit::TestCase
     @game.add_kill(kill)
     assert_equal(1, @game.kills.length, 'Expected only one kill')
     assert_equal(kill, @game.kills[0], 'Unexpected kill')
+    assert_equal(1, @game.killing_weapons.length, 'Expected only one killing_weapons')
+    assert_equal(Set.new.add(WeaponTest.new('test_weapon')), @game.killing_weapons, 'Unexpected killing weapon')
   end
 
   # @return [Nil]
@@ -107,6 +109,8 @@ class GameTest < Test::Unit::TestCase
     @game.add_suicide(suicide)
     assert_equal(1, @game.suicides.length, 'Expected only one suicide')
     assert_equal(suicide, @game.suicides[0], 'Unexpected suicide')
+    assert_equal(1, @game.killing_weapons.length, 'Expected only one killing_weapons')
+    assert_equal(Set.new.add(WeaponTest.new('test_weapon')), @game.killing_weapons, 'Unexpected killing weapon')
   end
 
   # @return [Nil]
@@ -143,7 +147,7 @@ class GameTest < Test::Unit::TestCase
     killer_name = 'killer'
     killer = Player.new(killer_name)
     @game.add_player(killer)
-    killed_name= 'killed'
+    killed_name = 'killed'
     killed = Player.new(killed_name)
     @game.add_player(killed)
     kill = new_valid_kill(killer, killed)
@@ -179,9 +183,9 @@ class GameTest < Test::Unit::TestCase
     @game.add_suicide(new_valid_suicide(player_name))
 
     expected_hash = {
-      'killer' => 1,
-      'killed' => 0,
-      'player' => -1
+        'killer' => 1,
+        'killed' => 0,
+        'player' => -1
     }
 
     assert_equal(expected_hash, @game.all_players_score, 'Score different than the expected')
@@ -201,4 +205,31 @@ class GameTest < Test::Unit::TestCase
 
     assert_equal(expected_rank, @game.player_rank, 'Calculated rank differs from expected one')
   end
+
+  def test_weapon_kill_score
+    @game.add_player(killer = Player.new('killer'))
+    @game.add_player(killed = Player.new('killed'))
+    @game.add_kill(kill = new_valid_kill(killer, killed))
+    player_name = 'player'
+    @game.add_player(Player.new('player'))
+    @game.add_suicide(new_valid_suicide(player_name))
+
+    weapon_kill_score = @game.weapon_kill_score(WeaponTest.new('test_weapon'))
+    assert_equal(2, weapon_kill_score, 'Error on weapon kill score calculation')
+  end
+
+  def test_all_weapon_kill_score
+    @game.add_player(killer = Player.new('killer'))
+    @game.add_player(killed = Player.new('killed'))
+    @game.add_kill(kill = new_valid_kill(killer, killed))
+    player_name = 'player'
+    @game.add_player(Player.new('player'))
+    @game.add_suicide(new_valid_suicide(player_name))
+
+    expected_weapon_kill_score = {'test_weapon' => 2}
+
+    all_weapon_kill_score = @game.all_weapons_kill_score
+    assert_equal(expected_weapon_kill_score, all_weapon_kill_score, 'Error on weapon kill score calculation')
+  end
+
 end

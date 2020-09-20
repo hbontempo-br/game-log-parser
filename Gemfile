@@ -12,4 +12,5 @@ group :test do
   gem 'rack', '~> 2.2'
   gem 'require_all'
   gem 'test-unit'
+  gem 'simplecov'
 end

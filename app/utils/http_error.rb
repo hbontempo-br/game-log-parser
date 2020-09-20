@@ -8,7 +8,7 @@ module Sinatra
     def halt_bad_request(details = nil)
       content_type :json
       status = 400
-      body = { message: 'Bad request' }
+      body = {message: 'Bad request'}
       body['details'] = details unless details.nil?
       halt status, body.to_json
     end
@@ -17,7 +17,7 @@ module Sinatra
     def halt_not_found(details = nil)
       content_type :json
       status = 404
-      body = { message: 'Not found' }
+      body = {message: 'Not found'}
       body['details'] = details unless details.nil?
       halt status, body.to_json
     end

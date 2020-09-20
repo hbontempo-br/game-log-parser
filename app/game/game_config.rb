@@ -50,7 +50,7 @@ class GameConfig
     end
   end
 
-  attr_reader :player_class, :weapon_class, :kill_class, :suicide_class ,:game_class
+  attr_reader :player_class, :weapon_class, :kill_class, :suicide_class, :game_class
 
   # @param player_class [Class<Player>]
   # @param weapon_class [Class<Weapon>]

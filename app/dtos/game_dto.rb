@@ -25,10 +25,11 @@ class GameDTO
   # @return [Hash]
   def to_hash
     {
-      total_kills: @game.total_deaths,
-      players: @game.players.to_a,
-      kills: @game.all_players_score,
-      rank: formatted_rank
+        total_kills: @game.total_deaths,
+        players: @game.players.to_a,
+        kills: @game.all_players_score,
+        rank: formatted_rank,
+        kills_by_means: @game.all_weapons_kill_score
     }
   end
 
@@ -38,7 +39,7 @@ class GameDTO
   def formatted_rank
     rank_map = {}
     @game.player_rank.each_with_index do |item, index|
-      rank_map[(index+1).to_s] = item
+      rank_map[(index + 1).to_s] = item
     end
     rank_map
   end

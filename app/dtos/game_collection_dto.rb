@@ -29,7 +29,7 @@ class GameCollectionDTO
     game_collection_hash = {}
     @game_collection.games.each_with_index do |game, index|
       game_dto = GameDTO.new(game)
-      game_collection_hash['game_'+ (index+1).to_s] = game_dto.to_hash
+      game_collection_hash['game_' + (index + 1).to_s] = game_dto.to_hash
     end
     game_collection_hash
   end
