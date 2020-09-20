@@ -44,8 +44,7 @@ class GameDTOTest < Test::Unit::TestCase
     @game.add_player(killed = Player.new('killed'))
     @game.add_kill(kill = new_valid_kill(killer, killed))
     player_name = 'player'
-    suicide_player = Player.new('player')
-    @game.add_player(suicide_player)
+    @game.add_player(Player.new('player'))
     @game.add_suicide(new_valid_suicide(player_name))
   end
 
@@ -65,9 +64,9 @@ class GameDTOTest < Test::Unit::TestCase
     game_dto = GameDTO.new(@game)
     game_dto_hash = game_dto.to_hash
     expected_hash = {
-      'total_kills' => 2,
-      'players' => %w[killer killed player],
-      'kills' => {
+      total_kills: 2,
+      players: %w[killer killed player],
+      kills: {
         'killer' => 1,
         'killed' => 0,
         'player' => -1

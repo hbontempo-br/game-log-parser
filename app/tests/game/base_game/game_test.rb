@@ -169,5 +169,22 @@ class GameTest < Test::Unit::TestCase
     assert_raise(Game::GamePlayerNotInGame) { @game.player_kill_score(Player.new('Player not in game')) }
   end
 
+  # @return [Nil]
+  def test_all_players_score
+    @game.add_player(killer = Player.new('killer'))
+    @game.add_player(killed = Player.new('killed'))
+    @game.add_kill(kill = new_valid_kill(killer, killed))
+    player_name = 'player'
+    @game.add_player(Player.new('player'))
+    @game.add_suicide(new_valid_suicide(player_name))
 
+    expected_hash = {
+      'killer' => 1,
+      'killed' => 0,
+      'player' => -1
+    }
+
+    assert_equal(expected_hash, @game.all_players_score, 'Score different than the expected')
+
+  end
 end

@@ -97,4 +97,14 @@ class Game
     end
     kills
   end
+
+  # @return [Hash]
+  def all_players_score
+    kills_hash = {}
+    @players.each do |player|
+      kills_hash[player] = player_kill_score(player)
+    end
+    kills_hash
+  end
+
 end

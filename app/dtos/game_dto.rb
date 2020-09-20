@@ -24,15 +24,10 @@ class GameDTO
 
   # @return [Hash]
   def to_hash
-    kills_hash = {}
-    @game.players.each do |player|
-      kills_hash[player] = @game.player_kill_score(player)
-    end
-
-    game_hash = {}
-    game_hash['total_kills'] = @game.total_deaths
-    game_hash['players'] = @game.players.to_a
-    game_hash['kills'] = kills_hash
-    game_hash
+    {
+      total_kills: @game.total_deaths,
+      players: @game.players.to_a,
+      kills: @game.all_players_score
+    }
   end
 end
