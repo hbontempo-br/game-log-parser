@@ -29,7 +29,8 @@ class GameDTO
         players: @game.players.to_a,
         kills: @game.all_players_score,
         rank: formatted_rank,
-        kills_by_means: @game.all_weapons_kill_score
+        kills_by_means: @game.all_weapons_kill_score,
+        is_valid: @game.is_valid
     }
   end
 

@@ -49,7 +49,7 @@ class Game
     end
   end
 
-  attr_reader :players, :killing_weapons, :kills, :suicides
+  attr_reader :players, :killing_weapons, :kills, :suicides, :is_valid
 
   # @return [Game]
   def initialize
@@ -57,6 +57,7 @@ class Game
     @killing_weapons = Set.new
     @kills = []
     @suicides = []
+    @is_valid = true
   end
 
   # @param player [Player]
@@ -85,6 +86,11 @@ class Game
 
     add_killing_weapon(suicide.weapon)
     @suicides.append(suicide)
+  end
+
+  # @return [Boolean]
+  def invalidate
+    @is_valid = false
   end
 
   # @return [Integer]
@@ -149,7 +155,6 @@ class Game
   end
 
   private
-
 
   # @param weapon [Weapon]
   # @return [Set<Weapon>]

@@ -113,13 +113,18 @@ class BaseLogParser
     game_collection = GameCollection.new
     current_game = nil
 
-    # TODO: Handle better cases where there are errors (like invalidating the game)
-
     file_reader.each do |record|
       # TODO: Remove if-else and use a more scalable solution (like with a hashmap - getType then a processFunction[type])
       if new_game?(record)
-        raise GameNotFinishedGameLogParserError unless current_game.nil?
         raise UnexpectedGameTypeLogParserError unless current_game.is_a?(Game) || current_game.nil?
+
+        # if a new game record is presented before the ending of the last game it indicates that
+        # the last game is invalid. No complete log was provided
+        unless current_game.nil?
+          current_game.invalidate
+          game_collection.add_game(current_game)
+          current_game = nil
+        end
 
         current_game = @game_config.game_class.new
       elsif game_end?(record)

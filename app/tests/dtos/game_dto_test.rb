@@ -78,7 +78,8 @@ class GameDTOTest < Test::Unit::TestCase
       },
       kills_by_means: {
         'test_weapon' => 2
-      }
+      },
+      is_valid: true
     }
     assert_equal(expected_hash, game_dto_hash, 'Invalid hash generated')
   end

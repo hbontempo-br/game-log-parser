@@ -25,7 +25,7 @@ class QuakeLogControllerTest < Test::Unit::TestCase
   end
 
   def test_post_valid_file
-    expected_body = '{"game_1":{"total_kills":0,"players":["Isgalamido"],"kills":{"Isgalamido":0},"rank":{"1":"Isgalamido"},"kills_by_means":{}}}'
+    expected_body = '{"game_1":{"total_kills":0,"players":["Isgalamido"],"kills":{"Isgalamido":0},"rank":{"1":"Isgalamido"},"kills_by_means":{},"is_valid":true}}'
 
     file = Rack::Test::UploadedFile.new(__dir__ + '/test_files/valid.log', 'text/plain')
     post '/quake/upload', {'file' => file}

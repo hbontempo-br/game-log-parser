@@ -83,7 +83,8 @@ class GameCollectionDTOTest < Test::Unit::TestCase
       },
       kills_by_means: {
         'test_weapon' => 2
-      }
+      },
+      is_valid: true
     }
     expected_hash = {
       'game_1' => expected_game_hash,

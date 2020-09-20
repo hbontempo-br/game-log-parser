@@ -45,7 +45,10 @@ class GameTest < Test::Unit::TestCase
   # @return [Nil]
   def test_new_game
     assert_empty(@game.players, 'Players should be initialized empty')
+    assert_empty(@game.killing_weapons, 'Killing weapons should be initialized empty')
+    assert_empty(@game.suicides, 'Suicides should be initialized empty')
     assert_empty(@game.kills, 'Kills should be initialized empty')
+    assert_true(@game.is_valid, 'Game should be valid upon creation')
   end
 
   # @return [Nil]
@@ -124,6 +127,11 @@ class GameTest < Test::Unit::TestCase
     player_name = 'player'
     suicide = new_valid_suicide(player_name)
     assert_raise(Game::GamePlayerNotInGame) { @game.add_suicide(suicide) }
+  end
+
+  def test_game_invalidation
+    @game.invalidate
+    assert_false(@game.is_valid, 'Game should be invalid')
   end
 
   # @return [Nil]
