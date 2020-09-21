@@ -5,9 +5,17 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:2.7.1
+      - image: ruby:2.7.1
     executor: ruby/default
     steps:
       - checkout
-      - ruby/install-deps
+      - run:
+          name: Bundler install
+          command: gem install bundler
+      - run:
+          name: Dependencies install
+          command: bundle install
+      - run:
+          name: Execute tests
+          command: ruby app/tests/tests.rb
 
