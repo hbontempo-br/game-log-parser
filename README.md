@@ -1,4 +1,7 @@
 # Game Log Parser
+[![ci](https://circleci.com/gh/hbontempo-br/game-log-parser.svg?style=shield)](https://circleci.com/gh/hbontempo-br/game-log-parser) 
+[![codecov](https://codecov.io/gh/hbontempo-br/game-log-parser/branch/master/graph/badge.svg)](https://codecov.io/gh/hbontempo-br/game-log-parser)
+
 A simple web application that receives logs from multiplayer FPS games and parse than to a more readable and simplified JSON.
 
 <b> Implemented parsers:</b>
