@@ -9,8 +9,9 @@ gem 'rack-test', '~> 1.1'
 gem 'sinatra', '~> 2.1'
 
 group :test do
+  gem 'codecov'
   gem 'rack', '~> 2.2'
   gem 'require_all'
-  gem 'test-unit'
   gem 'simplecov'
+  gem 'test-unit'
 end
