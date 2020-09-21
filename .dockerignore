@@ -1,0 +1,11 @@
+.git
+.gitignore
+README.md
+LICENSE
+.ruby-version
+CODE_OF_CONDUCT.md
+files
+coverage
+.circleci
+
+app/tests
